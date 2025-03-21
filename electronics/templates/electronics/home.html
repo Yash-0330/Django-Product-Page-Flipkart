@@ -3,70 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Electronics Store - Login</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient */
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            text-align: center;
         }
-        .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
         }
-        .login-container h2 {
+
+        h1 {
+            font-size: 2rem;
             margin-bottom: 20px;
-            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .input-field {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
+            font-size: 1rem;
+            display: block;
         }
-        .login-container button {
+
+        .btn {
+            display: inline-block;
             width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
+            padding: 12px;
+            font-size: 1rem;
             color: #fff;
+            background: #4CAF50;
+            text-decoration: none;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
         }
-        .login-container button:hover {
-            background-color: #45a049;
+
+        .btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
         }
+
         .product-link {
             display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #4CAF50;
+            margin-top: 15px;
+            color: #FFD700;
+            font-size: 1rem;
             text-decoration: none;
         }
+
         .product-link:hover {
             text-decoration: underline;
+        }
+
+        /* Animation */
+        .container {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form method="post">
+    <div class="container">
+        <h1>Welcome to Electronics Store</h1>
+        <p>Login to explore the latest gadgets, devices, and accessories at unbeatable prices.</p>
+        
+        <form onsubmit="redirectToProducts(event)">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required tabindex="1">
-            <input type="password" name="password" placeholder="Password" required tabindex="2">
-            <button type="submit" tabindex="3">Login</button>
+            <input type="text" name="username" class="input-field" placeholder="Username" required tabindex="1">
+            <input type="password" name="password" class="input-field" placeholder="Password" required tabindex="2">
+            <button type="submit" class="btn" tabindex="3">Login</button> 
         </form>
-        <a href="http://127.0.0.1:8000/electronics/product/" class="product-link" tabindex="4">Go to Products</a>
+
     </div>
+
+    <script>
+        function redirectToProducts(event) {
+            event.preventDefault(); // Prevent actual form submission
+            window.location.href = "http://127.0.0.1:8000/electronics/product/";
+        }
+    </script>
 </body>
 </html>

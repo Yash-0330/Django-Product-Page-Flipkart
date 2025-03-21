@@ -1,5 +1,6 @@
 """
 URL configuration for flipkart project.
+
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
 Examples:
@@ -19,6 +20,6 @@ from electronics import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home ,name='home.html'),
-    path('electronics/',include('electronics.urls')),
+    path('', views.home, name='home'),
+    path('electronics/', include('electronics.urls')),
 ]

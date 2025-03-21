@@ -19,7 +19,26 @@
             background-color: #4CAF50;
             margin-bottom: 40px;
             font-size: 36px;
+            border-radius: 5px 5px 0 0;
         }
+        /* Navbar */
+        .navbar {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        /* Main Product Container */
         .product-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -64,7 +83,12 @@
             height: auto;
             border-radius: 8px;
             margin-bottom: 20px;
+            transition: transform 0.3s ease;
         }
+        .product-card img:hover {
+            transform: scale(1.05);
+        }
+        /* Form Container */
         .form-container {
             max-width: 400px;
             margin: 30px auto;
@@ -113,31 +137,59 @@
             display: block;
             color: #333;
         }
+        /* Buttons for Update and Delete */
+        .product-card a button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 0;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .product-card a button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
 
-<h1>Product Detail Page</h1>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/products">All Products</a>
+        <a href="/cart">Cart</a>
+        <a href="/profile">Profile</a>
+    </div>
 
-<div class="product-container">
-    {% for pro in prod %}
-        <div class="product-card">
-            <img src="{{ pro.image_url }}" alt="{{ pro.name }}">
-            <h2>{{ pro.name }}</h2>
-            <p class="price">${{ pro.price }}</p>
-            <p>{{ pro.description }}</p>
-        </div>
-    {% endfor %}
-</div>
+    <h1>Product Detail Page</h1>
 
-<div class="form-container">
-    <h3>Add Product to Cart</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Add to Cart">
-    </form>
-</div>
+    <div class="product-container">
+        {% for pro in prod %}
+            <div class="product-card">
+                <img src="{{ pro.image_url }}" alt="{{ pro.name }}">
+                <h2>{{ pro.name }}</h2>
+                <p class="price">${{ pro.price }}</p>
+                <p>{{ pro.description }}</p>
+                <a href="{% url 'update_product' pro.id %}">
+                    <button type="button">Update</button>
+                </a>
+                <a href="{% url 'delete_product' pro.id %}">
+                    <button type="button">Delete</button>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="form-container">
+        <h3>Add Product to Cart</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add to Cart">
+        </form>
+    </div>
 
 </body>
 </html>
